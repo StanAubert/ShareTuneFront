@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './Models/User';
+import { Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',

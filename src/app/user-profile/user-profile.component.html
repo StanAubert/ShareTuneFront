@@ -1,0 +1,11 @@
+<div class="alert alert-secondary">
+  <h1>Mon profil</h1>
+  <img src="{{user?.profilePicture}}" alt="image de {{user?.name}}" class="rounded">
+  <h3>{{user?.name}}</h3>
+  <p>{{user?.description}}</p>
+  <h3><a routerLink="/account/{{user?.id}}/playlists">Playlists</a></h3>
+  <ul>
+    <li *ngFor="let p of user?.playlists"> <a routerLink="/playlist/{{p.id}}">{{p.title}}</a></li>
+  </ul>
+  <button *ngIf="user?.id == userLocal?.id" routerLink="/playlist/new" class="btn-info">Ajouter une playlist</button>
+</div>

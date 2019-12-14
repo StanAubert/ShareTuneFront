@@ -1,0 +1,18 @@
+<div class="alert alert-secondary">
+  <h1>{{playlist?.title}} <span *ngIf="userLocal.id == playlist?.user?.id" routerLink="/playlist/{{playlist?.id}}/edit"
+      class="btn btn-info"><i class="fas fa-edit"></i></span> </h1>
+  <small *ngFor="let tag of playlist?.tags"
+    class="badge badge-pill badge-info font-weight-light mr-2 mb-3">{{tag?.title}}</small>
+
+  <p>Description: {{playlist?.decription}}</p>
+
+  <div class="alert alert-info" *ngFor="let song of playlist?.songs">
+    <p>{{song.title}} ({{song.duration}})</p>
+  </div>
+
+  <button *ngIf="userLocal.id == playlist?.user?.id" routerLink="/playlist/{{playlist?.id}}/add"
+    class="btn btn-success mr-2">Ajouter un morceau</button>
+  <button class="btn btn-info" routerLink="/account/{{playlist?.user?.id}}">Retour</button>
+
+
+</div>

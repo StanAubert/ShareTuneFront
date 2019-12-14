@@ -1,0 +1,14 @@
+<div class="alert alert-secondary">
+  <h2 class="alert-title">Playlists</h2>
+
+  <div *ngFor="let playlist of playlists" class="alert alert-info">
+    <h2 class="alert-title"><a routerLink="/playlist/{{playlist.id}}">{{playlist.title}}</a></h2>
+    <small class="badge badge-pill badge-secondary mr-2 mb-3 font-weight-light"
+      *ngFor="let tag of playlist.tags">{{tag.title}}</small>
+    <p>{{playlist.decription}}</p>
+
+    <button class="btn btn-secondary" routerLink="/account/{{userId}}">Retour
+    </button>
+  </div>
+
+</div>

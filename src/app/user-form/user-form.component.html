@@ -1,0 +1,45 @@
+<h1>Inscription</h1>
+
+<form #registerForm="ngForm" [formGroup]="form" (ngSubmit)="handleSubmit()">
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Nom d'utilisateur" formControlName="name"
+      [class.is-invalid]="form.get('name').errors && (form.get('name').touched)">
+    <p class="invalid-feedback" *ngIf="form.getError('required', 'name') && (form.get('name').touched)">Ce
+      champs est
+      obligatoire</p>
+
+  </div>
+  <div class="form-group"> <input type="email" class="form-control" placeholder="adresse email" formControlName="email"
+      [class.is-invalid]="form.get('email').errors && form.get('email').touched">
+    <p class="invalid-feedback" *ngIf="form.getError('required', 'email') && (form.get('email').touched)">Ce champs est
+      obligatoire</p>
+    <p class="invalid-feedback" *ngIf="form.getError('email', 'email') && (form.get('email').touched)">L'email doit etre
+      au bon format</p>
+  </div>
+  <div class="form-group"><input type="password" class="form-control" placeholder="mot de passe"
+      formControlName="password" [class.is-invalid]="form.get('password').errors && (form.get('password').touched)">
+    <p class="invalid-feedback" *ngIf="form.getError('required', 'password') && (form.get('password').touched)">Ce
+      champs est
+      obligatoire</p>
+  </div>
+  <div class="form-group"><input type="password" class="form-control" placeholder="confirmation de mot de passe"
+      formControlName="confirmation"
+      [class.is-invalid]="(form.get('confirmation').errors && form.get('confirmation').touched )||(form.get('confirmation').touched && form.get('password').value != form.get('confirmation').value)">
+    <p class="invalid-feedback" *ngIf="form.getError('required', 'confirmation') && (form.get('confirmation').touched)">
+      Ce champs
+      est
+      obligatoire</p>
+    <p class="invalid-feedback" *ngIf="form.get('password').value != form.get('confirmation').value">
+      Les mots de passes doivent correspondre
+    </p>
+  </div>
+  <div class="form-group"><textarea class="form-control" placeholder="Entrez votre description"
+      formControlName="description"></textarea>
+  </div>
+  <div class="form-group"><input type="text" class="form-control" placeholder="Url photo de profil"
+      formControlName="profilePicture">
+  </div>
+
+  <button type="submit" class="btn btn-success">Enregistrer</button>
+</form>
