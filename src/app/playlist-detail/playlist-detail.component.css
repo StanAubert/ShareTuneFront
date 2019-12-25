@@ -1,0 +1,49 @@
+.loading {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  z-index: 100;
+}
+
+.loading p {
+  font-size: 5rem;
+}
+
+
+.song-description {
+  max-height: 200px;
+  overflow: auto;
+}
+
+.song-table {
+  max-height: 450px;
+  overflow: auto;
+}
+
+.playlist-box,
+.bg-dark-07 {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: #000 0px 0px 6px 1px;
+
+}
+
+.playlist-box h1 {
+  font-family: 'Bree Serif', serif;
+  color: #ddd;
+}
+
+.smooth {
+  transition: all 100ms;
+}
+
+.cog-icon {
+  font-size: 1.3rem;
+}
+
+.point {
+  cursor: pointer;
+}

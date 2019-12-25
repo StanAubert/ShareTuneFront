@@ -1,0 +1,19 @@
+<div *ngIf="loading == false" class="loading d-flex text-center justify-content-center">
+  <p><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
+</div>
+
+<div class="alert">
+  <h1 class="text-center title mb-5">{{tag?.title}}</h1>
+
+  <ngx-simplebar class="row playlists-box">
+    <div *ngFor="let playlist of tag?.playlists" class="col-sm-12 mx-3 alert bg-dark-07 row tag-item"
+      routerLink="/playlist/{{playlist?.id}}">
+      <div class="playlist-icon text-center"><i class="fas fa-compact-disc fa-lg fa-spin"></i></div>
+      <div class="col">
+        <h3>{{playlist?.title}}({{playlist?.songs.length}} morceaux)</h3>
+        <p>Auteur: {{playlist?.user.name}}</p>
+      </div>
+
+    </div>
+  </ngx-simplebar>
+</div>

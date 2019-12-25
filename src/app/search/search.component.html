@@ -1,0 +1,84 @@
+<form [formGroup]="form">
+  <div class="form-group">
+    <input type="text" placeholder="votre recherche" name="search" formControlName="search" class="form-control"
+      (keyup)="handleSearch($event)" autocomplete="off">
+  </div>
+  <div class="d-inline custom-control custom-radio mx-3">
+    <input class="custom-control-input" type="radio" name="filterOptions" id="all" value="all"
+      (focus)="filterSearch('all')" checked>
+    <label class="label custom-control-label" [class.selected-label]="filter == 'all'" for="all">Tout</label>
+  </div>
+  <div class="d-inline custom-control custom-radio mx-3">
+    <input class="custom-control-input" type="radio" name="filterOptions" id="tag-radio" value="tag"
+      (focus)="filterSearch('tag')">
+    <label class="label custom-control-label" [class.selected-label]="filter == 'tag'" for="tag-radio">Tags</label>
+  </div>
+  <div class="d-inline custom-control custom-radio mx-3">
+    <input class="custom-control-input" type="radio" name="filterOptions" id="playlist-radio" value="playlist"
+      (focus)="filterSearch('playlist')">
+    <label class="label custom-control-label" [class.selected-label]="filter == 'playlist'"
+      for="playlist-radio">Playlists</label>
+  </div>
+  <div class="d-inline custom-control custom-radio mx-3">
+    <input class="custom-control-input" type="radio" name="filterOptions" id="user-radio" value="user"
+      (focus)="filterSearch('user')">
+    <label class="label custom-control-label" [class.selected-label]="filter == 'user'"
+      for="user-radio">Utilisateurs</label>
+  </div>
+  <!-- <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="filterOptions" id="song-radio" value="song"
+      (focus)="filterSearch('song')">
+    <label class="form-check-label" for="song-radio">Morceaux</label>
+  </div> -->
+</form>
+
+<div class="search-result">
+  <ng-container *ngIf="filter=='all' || filter == 'tag'">
+    <div *ngFor="let tag of tags">
+      <div *ngIf="tag.title.toLowerCase().includes(search) && search" class="search-item alert bg-dark-07 row"
+        routerLink="/tag/{{tag.id}}">
+        <div class="tag-icon text-center"><i class="fas fa-heart fa-lg"></i></div>
+        <div class="col">
+          <h3>{{tag.title}}({{tag.playlists.length}} playlists)</h3>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="filter=='all' || filter == 'playlist'">
+    <div *ngFor="let playlist of playlists">
+      <div *ngIf="playlist.title.toLowerCase().includes(search) && search" class="search-item alert bg-dark-07 row"
+        routerLink="/playlist/{{playlist.id}}">
+        <div class="playlist-icon text-center"><i class="fas fa-compact-disc fa-lg fa-spin"></i></div>
+        <div class="col">
+          <h3>{{playlist.title}}({{playlist.songs.length}} morceaux)</h3>
+          <p>Auteur: {{playlist.user.name}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="filter=='all' || filter == 'user'">
+    <div *ngFor="let user of users">
+      <div routerLink="/account/{{user.id}}" *ngIf="user.name.toLowerCase().includes(search) && search"
+        class="search-item alert bg-dark-07 row">
+        <div class="user-icon text-center"><i class="fas fa-user fa-lg"></i></div>
+        <div class="col">
+          <h3>{{user.name}}({{user.playlists.length}} playlists)</h3>
+
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+  <!-- <ng-container *ngIf="filter=='all' || filter == 'song'">
+
+    <div *ngFor="let song of songs">
+      <div *ngIf="song.title.toLowerCase().includes(search) && search" class="alert bg-dark-07 row">
+        <div class="song-icon text-center"><i class="fas fa-music fa-lg"></i></div>
+        <div class="col">
+          <h3>{{song.title}}</h3>
+
+        </div>
+      </div>
+    </div>
+  </ng-container> -->
+</div>

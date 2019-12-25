@@ -1,13 +1,25 @@
-<div class="alert alert-primary">
+<div *ngIf="loading == false" class="loading d-flex text-center justify-content-center">
+  <p class=""><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
+</div>
+
+<div class="alert bg-dark-07">
 
   <h1 class="alert-title">Connexion</h1>
 
-  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <div class="form-group"><input type="email" class="form-control" placeholder="votre adresse email"
-        formControlName="email"></div>
-    <div class="form-group"><input type="password" class="form-control" placeholder="votre mot de passe"
-        formControlName="password"></div>
+  <p class="alert alert-danger" *ngIf="hasError">Adresse mail ou mot de passe invalide</p>
 
-    <button type="submit" class="btn btn-success">Connexion</button>
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="form-group"><input type="email" class="form-control" formControlName="email" placeholder="adresse email"
+        [class.is-invalid]="form.get('email').errors && form.get('email').touched">
+      <p class="invalid-feedback" *ngIf="form.getError('required', 'email') && (form.get('email').touched)">L'adresse
+        mail est nécessaire pour se connecter</p>
+    </div>
+    <div class="form-group"><input type="password" class="form-control" placeholder="votre mot de passe"
+        formControlName="password" [class.is-invalid]="form.get('password').errors && form.get('password').touched">
+      <p class="invalid-feedback" *ngIf="form.getError('required', 'password') && (form.get('password').touched)">Le mot
+        de passe est nécessaire pour se connecter</p>
+    </div>
+
+    <button type="submit" class="btn btn-custom">Se connecter</button>
   </form>
 </div>

@@ -7,5 +7,5 @@ export interface User {
   password: string;
   description: string;
   profilePicture: string;
-  playlists: Playlist;
+  playlists: Playlist[];
 }

@@ -1,3 +1,47 @@
 img {
   max-width: 300px;
 }
+
+
+.bg-dark-07 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.playlist-icon {
+  font-size: 2.5rem;
+  padding: 8px;
+  margin: 0;
+  background-color: #f223;
+  border: 3px outset #f22;
+  border-radius: 5%;
+  min-width: 80px;
+  width: 80px;
+  height: 80px;
+
+}
+
+.playlist-icon i {
+  padding: 0;
+}
+
+.profile-image-box {
+  border: 5px solid #f229;
+  overflow: hidden;
+  background-color: #f223;
+}
+
+.playlist-box {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.playlist {
+  cursor: pointer !important;
+}
+
+.profile-image-box,
+.profile-image-loading {
+  max-width: 400px;
+  width: 300px;
+  height: 300px;
+}

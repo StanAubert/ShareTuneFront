@@ -21,8 +21,11 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@angular/youtube-player": "^8.2.3",
     "get-youtube-id": "^1.0.1",
     "rxjs": "~6.4.0",
+    "simplebar": "^5.1.0",
+    "simplebar-angular": "^2.1.0",
     "tslib": "^1.10.0",
     "youtube-playlist-summary": "^2.0.4",
     "zone.js": "~0.9.1"

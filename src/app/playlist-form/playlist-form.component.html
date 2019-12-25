@@ -1,23 +1,34 @@
+<div *ngIf="loading == false" class="loading d-flex text-center justify-content-center">
+  <p><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
+</div>
+
 <div class="alert alert-secondary">
 
-  <h1>Nouvelle playlist</h1>
+  <h1>
+    <ng-container *ngIf="playlist && playlist.id !== null">Modifier la playlist {{playlist.title}}</ng-container>
+    <ng-container *ngIf="!playlist">Ajouter une playlist</ng-container>
+
+  </h1>
 
   <form [formGroup]="form" (ngSubmit)="handleSubmit()">
     <div class="form-group"><input type="text" class="form-control" placeholder="Titre de la playlist"
-        formControlName="title"></div>
+        formControlName="title" [class.is-invalid]="form.get('title').errors && form.get('title').touched">
+      <p class="invalid-feedback" *ngIf="form.get('title').errors && form.get('title').touched">Ce champs est
+        obligatoire</p>
+    </div>
     <div class="form-group"><textarea class="form-control" placeholder="Description de la playlist"
-        formControlName="decription"></textarea></div>
-    <!-- <div class="form-group">
-      <select type="text" class="form-control" formControlName="tags">
-        <option *ngFor="let tag of tags" value="{{tag.id}}"> {{tag.title}} </option>
-      </select>
-    </div> -->
+        formControlName="decription" [class.is-invalid]="form.get('title').errors && form.get('title').touched">
+       </textarea>
+      <p class="invalid-feedback" *ngIf="form.get('title').errors && form.get('title').touched">Ce champs est
+        obligatoire</p>
+    </div>
 
-
-    <mat-label>Tags</mat-label>
-    <mat-select formControlName="tags" multiple class="form-group">
-      <mat-option *ngFor="let tag of tags" class="form-control" value="{{tag.id}}">{{tag.title}}</mat-option>
-    </mat-select>
+    <div class="form-group">
+      <span (click)="toggleTag(tag.id)" class="tag badge mx-2 mb-4" [class.badge-info]="!isInTagArray(tag.id)"
+        [class.badge-success]="isInTagArray(tag.id)" [class.badge-pill]="isInTagArray(tag.id)"
+        *ngFor="let tag of tags">{{tag.title}}</span>
+      <input type="hidden" formControlName="tags" value="{{tagArray}}">
+    </div>
 
 
     <button type="submit" class="btn btn-success">Enregistrer</button>

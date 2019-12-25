@@ -14,7 +14,7 @@ import { User } from '../Models/User';
 })
 export class PlaylistListComponent implements OnInit {
 
-  playlists: Playlist;
+  playlists: Playlist[];
 
   // id: string;
 

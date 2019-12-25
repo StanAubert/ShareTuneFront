@@ -1,18 +1,71 @@
-<div class="alert alert-secondary">
-  <h1>{{playlist?.title}} <span *ngIf="userLocal.id == playlist?.user?.id" routerLink="/playlist/{{playlist?.id}}/edit"
-      class="btn btn-info"><i class="fas fa-edit"></i></span> </h1>
-  <small *ngFor="let tag of playlist?.tags"
-    class="badge badge-pill badge-info font-weight-light mr-2 mb-3">{{tag?.title}}</small>
+<div *ngIf="loading == false" class="loading d-flex text-center justify-content-center">
+  <p class=""><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
+</div>
 
-  <p>Description: {{playlist?.decription}}</p>
-
-  <div class="alert alert-info" *ngFor="let song of playlist?.songs">
-    <p>{{song.title}} ({{song.duration}})</p>
+<div class="alert playlist-box">
+  <h1>{{playlist?.title}} <div *ngIf="userLocal.id == playlist?.user?.id" class="btn-group" role="group"
+      aria-label="Button group with nested dropdown">
+      <button type="button" class="btn btn-danger"><i class="fas fa-cog cog-icon"></i></button>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop4" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop4">
+          <a class="dropdown-item text-decoration-none point" routerLink="/playlist/{{playlist?.id}}/edit">modifier</a>
+          <a class="dropdown-item text-decoration-none point" (click)="delete(playlist.id)">Supprimer</a>
+        </div>
+      </div>
+    </div>
+  </h1>
+  <span *ngFor="let tag of playlist?.tags" class="badge badge-pill badge-warning  mr-2 mb-3"><a
+      routerLink="/tag/{{tag?.id}}" class="text-decoration-none">{{tag?.title}}</a></span>
+  <div class="float-right" id="actions-btn">
+    <button *ngIf="userLocal.id == playlist?.user?.id" routerLink="/playlist/{{playlist?.id}}/add"
+      class="btn btn-warning mr-2">Ajouter un morceau</button>
+    <button class="btn btn-danger" routerLink="/account/{{playlist?.user?.id}}">Retour</button>
   </div>
+  <div *ngIf="playlist?.songs.length === 0" class="alert alert-primary">
+    <h2 class="alert-title">Oups ! Il semblerait que cette playlist ne contienne aucun morceau pour le moment !</h2>
+    <div *ngIf="userLocal.id == playlist?.user?.id">
+      <p class="h4">Ajoutez-en dès maintenant en cliquant sur le bouton ci-dessous !</p>
+      <button routerLink="/playlist/{{playlist?.id}}/add" class="btn btn-warning mr-2">Ajouter un morceau</button>
+    </div>
 
-  <button *ngIf="userLocal.id == playlist?.user?.id" routerLink="/playlist/{{playlist?.id}}/add"
-    class="btn btn-success mr-2">Ajouter un morceau</button>
-  <button class="btn btn-info" routerLink="/account/{{playlist?.user?.id}}">Retour</button>
-
-
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12 col-lg-7">
+      <youtube-player #player (stateChange)="onStateChange($event)" *ngIf="firstSong" videoId="{{firstSong.code}}"
+        width="100%" height="450">
+      </youtube-player>
+    </div>
+    <ngx-simplebar class="song-table col">
+      <table class="table table-hover table-dark">
+        <tbody>
+          <tr *ngFor="let song of playlist?.songs">
+            <td><button [class.btn-warning]="isPaused(song)" [class.btn-success]="isPlaying(song)"
+                [class.rounded-circle]="isPlaying(song)" (click)="play(song, $event)" class="btn rounded smooth">
+                <i class="fas smooth" [class.fa-play]="isPaused(song)" [class.fa-pause]="isPlaying(song)"></i>
+              </button>
+            </td>
+            <td>{{song.title}} <a *ngIf="userLocal.id == playlist?.user?.id" class="text-warning"
+                routerLink="/song/{{song.id}}/edit"><i class="fas fa-edit"></i></a></td>
+            <td>{{song.duration}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ngx-simplebar>
+  </div>
+  <div class="row">
+    <div class="mt-2 py-4 w-50 col">
+      <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#description"
+        aria-expanded="false" aria-controls="description">
+        Afficher la description
+      </button>
+    </div>
+  </div>
+  <div class="collapse" id="description">
+    <div class="card-header"> Description</div>
+    <div class="card card-body">
+      {{playlist?.decription}}
+    </div>
+  </div>
 </div>

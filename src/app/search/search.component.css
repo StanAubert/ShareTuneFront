@@ -1,0 +1,73 @@
+.playlist-icon {
+  font-size: 2.5rem;
+  padding: 20px;
+  margin: 0;
+  background-color: #f223;
+  border: 3px outset #f22;
+  border-radius: 5%;
+  width: 105px;
+  height: 105px;
+
+}
+
+.tag-icon {
+  font-size: 2.5rem;
+  padding: 20px;
+  margin: 0;
+  background-color: #82f3;
+  border: 3px outset #82f;
+  border-radius: 5%;
+  width: 105px;
+  height: 105px;
+
+}
+
+.user-icon {
+  font-size: 2.5rem;
+  padding: 20px;
+  margin: 0;
+  background-color: #2d23;
+  border: 3px outset #2d2;
+  border-radius: 5%;
+  width: 105px;
+  height: 105px;
+
+}
+
+.song-icon {
+  font-size: 2.5rem;
+  padding: 20px;
+  margin: 0;
+  background-color: rgba(220, 160, 35, 0.5);
+  border: 3px outset #d5a021;
+  border-radius: 5%;
+  width: 105px;
+  height: 105px;
+
+}
+
+.playlist-icon i,
+.tag-icon i,
+.user-icon i,
+.song-icon i {
+  padding: 0;
+}
+
+.bg-dark-07 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.label {
+  transition: all 300ms;
+}
+
+.selected-label {
+  font-weight: bolder;
+  text-shadow: white 0px 0px 10px 2px;
+  color: #d5a021;
+  text-decoration: underline;
+}
+
+.search-item {
+  cursor: pointer !important;
+}

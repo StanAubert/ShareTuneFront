@@ -1,3 +1,23 @@
 img {
   max-width: 25px;
 }
+
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Lobster', cursive;
+font-family: 'Bree Serif', serif; */
+
+img.logo {
+  max-width: 300px;
+  height: 90px;
+  margin-right: auto;
+  align-self: center;
+}
+
+/* .btn-custom {
+  background-color: #f223;
+  border: 3px outset #f22
+}
+
+.btn-custom:hover {
+  background-color: #f22a;
+} */

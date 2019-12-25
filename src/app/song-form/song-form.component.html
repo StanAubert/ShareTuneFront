@@ -1,20 +1,33 @@
+<div *ngIf="loading == false" class="loading d-flex text-center justify-content-center">
+  <p class=""><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
+</div>
+
 <div class="alert alert-secondary">
 
-  <h1>Ajouter un morceau</h1>
+  <h1>
+    <ng-container *ngIf="song == null">Ajouter un morceau</ng-container>
+    <ng-container *ngIf="song !== null">Modifier un morceau</ng-container>
+  </h1>
+  <button *ngIf="song == null" class="btn btn-danger" routerLink="/playlist/{{playlistId}}">Retour</button>
+  <button *ngIf="song !== null" class="btn btn-danger" (click)="back()">Retour</button>
 
   <form [formGroup]="form" (ngSubmit)="handleSubmit()">
 
-    <div class="form-group"><input type="hidden" class="form-control" placeholder="Titre" formControlName="title"></div>
-    <!-- <div class="form-group"><textarea class="form-control" placeholder="Description"
-        formControlName="description"></textarea></div> -->
-    <div class="form-group"><input type="hidden" class="form-control" formControlName="description"></div>
-    <div class="form-group"><input type="text" class="form-control" placeholder="Url de la musique"
+    <div class="form-group"><input type="{{type}}" class="form-control" placeholder="Titre" formControlName="title"
+        [class.is-invalid]="form.get('title').errors && form.get('title').touched">
+      <p class="invalid-feedback" *ngIf="form.get('title').errors && form.get('title').touched">Ce champs est
+        obligatoire</p>
+    </div>
+    <div class="form-group"><input type="{{type}}" class="form-control" formControlName="description"></div>
+    <div *ngIf="song == null" class="form-group"><input type="text" class="form-control" placeholder="Url de la musique"
         formControlName="code"></div>
-    <div class="form-group"><input type="hidden" class="form-control" placeholder="Durée" formControlName="duration">
+    <div class="form-group"><input type="{{type}}" class="form-control" formControlName="duration"
+        [class.is-invalid]="form.get('duration').errors && form.get('duration').touched" placeholder="Durée">
+      <p class="invalid-feedback" *ngIf="form.get('duration').errors && form.get('duration').touched">Ce champs est
+        obligatoire</p>
     </div>
     <div class="form-group"><input type="hidden" class="form-control" value="" formControlName="playlist"></div>
 
     <button type="submit" class="btn btn-success">Ajouter</button>
-
   </form>
 </div>

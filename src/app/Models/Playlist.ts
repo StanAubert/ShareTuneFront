@@ -8,5 +8,5 @@ export interface Playlist {
   decription: string;
   user: User;
   tags: Tag;
-  songs: Song;
+  songs: Song[];
 }

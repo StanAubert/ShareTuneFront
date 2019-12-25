@@ -7,19 +7,28 @@ import { LoginFormComponent } from "./login-form/login-form.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { UserFormComponent } from "./user-form/user-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from "@angular/common/http";
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UsersListComponent } from './users-list/users-list.component';
-import { credentialsInterceptor } from './authentication/regular-auth/credentials.interceptor';
-import { RegularAuthService } from './authentication/regular-auth/auth.service';
-import { AUTH_SERVICE } from './authentication/auth.injection';
-import { RegularAuthModule } from './authentication/regular-auth/regular-auth.module';
-import { PlaylistFormComponent } from './playlist-form/playlist-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material/select';
-import { PlaylistListComponent } from './playlist-list/playlist-list.component';
-import { PlaylistDetailComponent } from './playlist-detail/playlist-detail.component';
-import { SongFormComponent } from './song-form/song-form.component';
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpClient
+} from "@angular/common/http";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { UsersListComponent } from "./users-list/users-list.component";
+import { credentialsInterceptor } from "./authentication/regular-auth/credentials.interceptor";
+import { RegularAuthService } from "./authentication/regular-auth/auth.service";
+import { AUTH_SERVICE } from "./authentication/auth.injection";
+import { RegularAuthModule } from "./authentication/regular-auth/regular-auth.module";
+import { PlaylistFormComponent } from "./playlist-form/playlist-form.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatSelectModule } from "@angular/material/select";
+import { PlaylistListComponent } from "./playlist-list/playlist-list.component";
+import { PlaylistDetailComponent } from "./playlist-detail/playlist-detail.component";
+import { SongFormComponent } from "./song-form/song-form.component";
+import { YouTubePlayerModule } from "@angular/youtube-player";
+import { HomeComponent } from "./home/home.component";
+import { SearchComponent } from "./search/search.component";
+import { TagListComponent } from "./tag-list/tag-list.component";
+import { SimplebarAngularModule } from "simplebar-angular";
 
 @NgModule({
   declarations: [
@@ -32,7 +41,10 @@ import { SongFormComponent } from './song-form/song-form.component';
     PlaylistFormComponent,
     PlaylistListComponent,
     PlaylistDetailComponent,
-    SongFormComponent
+    SongFormComponent,
+    HomeComponent,
+    SearchComponent,
+    TagListComponent
   ],
   imports: [
     BrowserModule,
@@ -42,10 +54,18 @@ import { SongFormComponent } from './song-form/song-form.component';
     HttpClientModule,
     RegularAuthModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    YouTubePlayerModule,
+    SimplebarAngularModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: credentialsInterceptor, multi: true },
-  { provide: AUTH_SERVICE, useClass: RegularAuthService, deps: [HttpClient] }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: credentialsInterceptor,
+      multi: true
+    },
+    { provide: AUTH_SERVICE, useClass: RegularAuthService, deps: [HttpClient] }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

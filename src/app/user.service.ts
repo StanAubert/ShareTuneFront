@@ -20,7 +20,7 @@ export class UserService {
 
 
   all() {
-    return this.http.get<User>("http://localhost:3500/api/users", { withCredentials: true }
+    return this.http.get<User[]>("http://localhost:3500/api/users", { withCredentials: true }
     );
   }
 }

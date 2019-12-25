@@ -16,21 +16,24 @@ export class PlaylistService {
     return this.http.get<Playlist>("http://localhost:3500/api/playlists/" + id
     );
   }
-
   all() {
     return this.http.get<Playlist[]>("http://localhost:3500/api/playlists"
     );
   }
-
-  allTags() {
-    return this.http.get<Tag>("http://localhost:3500/api/tags")
-  }
-
   add(playlist: Playlist) {
     return this.http.post<Playlist>("http://localhost:3500/api/playlists", playlist)
   }
   update(playlist: Playlist) {
     return this.http.put<Playlist>("http://localhost:3500/api/playlists/" + playlist.id, playlist)
+  }
+  remove(id: number) {
+    return this.http.delete<Playlist>("http://localhost:3500/api/playlists/" + id)
+  }
+
+  // SONG SECTION
+
+  allSongs() {
+    return this.http.get<Song[]>("http://localhost:3500/api/songs")
   }
 
   getSongInfo(code: string) {
@@ -41,9 +44,27 @@ export class PlaylistService {
     return this.http.post<Song>("http://localhost:3500/api/songs", song)
   }
 
-  test(url) {
+  updateSong(song: Song) {
+    return this.http.put<Song>("http://localhost:3500/api/songs/" + song.id, song)
+  }
+
+  findSong(id: number) {
+    return this.http.get<Song>("http://localhost:3500/api/songs/" + id)
+  }
+
+  UrlToIdConverter(url) {
     const getYouTubeID = youtubeId;
     const id = getYouTubeID(url);
     return id;
+  }
+
+  // TAGS SECTION
+
+  allTags() {
+    return this.http.get<Tag[]>("http://localhost:3500/api/tags")
+  }
+
+  findTag(id: number) {
+    return this.http.get<Tag>("http://localhost:3500/api/tags/" + id)
   }
 }

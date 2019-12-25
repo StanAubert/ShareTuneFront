@@ -1,4 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Solway', serif;
+}
+
+.simplebar-scrollbar {
+  margin-right: 2px;
+}
+
+.simplebar-scrollbar::before {
+  /* background: rgb(255, 0, 0) !important; */
+  background: linear-gradient(120deg, #444 0%, #f22 33%, #f22 66%, #444 100%) !important;
+}
+
+.bg-dark-07 {
+  box-shadow: #000 0px 0px 6px 1px;
+
+}
+
+.loading {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  z-index: 100;
+}
+
+.loading p {
+  font-size: 5rem;
+}
