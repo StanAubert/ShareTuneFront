@@ -16,8 +16,9 @@
         </div>
       </div>
     </h2>
-    <div *ngIf="loading == true" class="profile-image-box rounded-circle d-flex align-items-center  align-self-center">
-      <img src="{{user?.profilePicture}}" alt="image de {{user?.name}}" class="profile-image">
+    <div *ngIf="loading == true"
+      class="profile-image-box d-flex align-items-center justify-content-center rounded-circle align-self-center">
+      <img src="{{user?.profilePicture}}" alt="image de {{user?.name}}" class="profile-image text-center">
     </div>
     <img *ngIf="loading == false" src="./../../assets/img/logo.png" alt="image de {{user?.name}}"
       class="profile-image-loading rounded-circle">

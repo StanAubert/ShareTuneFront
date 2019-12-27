@@ -37,7 +37,6 @@ export class LoginFormComponent implements OnInit {
     this.auth.login(this.form.value).subscribe(
       resultat => {
         // console.log(resultat);
-        this.loading = true;
 
         this.router.navigateByUrl("/account/" + resultat["id"]);
       },

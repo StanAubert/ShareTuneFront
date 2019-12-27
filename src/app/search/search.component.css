@@ -10,6 +10,10 @@
 
 }
 
+.playlist-i {
+  color: #f22;
+}
+
 .tag-icon {
   font-size: 2.5rem;
   padding: 20px;
@@ -22,6 +26,10 @@
 
 }
 
+.tag-i {
+  color: #82f;
+}
+
 .user-icon {
   font-size: 2.5rem;
   padding: 20px;
@@ -32,6 +40,10 @@
   width: 105px;
   height: 105px;
 
+}
+
+.user-i {
+  color: #2d2;
 }
 
 .song-icon {

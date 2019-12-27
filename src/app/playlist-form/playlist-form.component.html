@@ -2,7 +2,7 @@
   <p><i class="fas fa-compact-disc fa-spin"></i> Veuillez patientez ...</p>
 </div>
 
-<div class="alert alert-secondary">
+<div class="alert bg-dark-07">
 
   <h1>
     <ng-container *ngIf="playlist && playlist.id !== null">Modifier la playlist {{playlist.title}}</ng-container>
@@ -11,21 +11,26 @@
   </h1>
 
   <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-    <div class="form-group"><input type="text" class="form-control" placeholder="Titre de la playlist"
-        formControlName="title" [class.is-invalid]="form.get('title').errors && form.get('title').touched">
+    <div class="form-group">
+      <label for="title">Titre</label>
+      <input name="title" type="text" class="form-control" placeholder="Titre de la playlist" formControlName="title"
+        [class.is-invalid]="form.get('title').errors && form.get('title').touched" autocomplete="off">
       <p class="invalid-feedback" *ngIf="form.get('title').errors && form.get('title').touched">Ce champs est
         obligatoire</p>
     </div>
-    <div class="form-group"><textarea class="form-control" placeholder="Description de la playlist"
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea name="description" class="form-control" placeholder="Description de la playlist"
         formControlName="decription" [class.is-invalid]="form.get('title').errors && form.get('title').touched">
        </textarea>
       <p class="invalid-feedback" *ngIf="form.get('title').errors && form.get('title').touched">Ce champs est
         obligatoire</p>
     </div>
 
-    <div class="form-group">
-      <span (click)="toggleTag(tag.id)" class="tag badge mx-2 mb-4" [class.badge-info]="!isInTagArray(tag.id)"
-        [class.badge-success]="isInTagArray(tag.id)" [class.badge-pill]="isInTagArray(tag.id)"
+    <div class="form-group text-center">
+      <h3>Tags:</h3>
+      <span (click)="toggleTag(tag.id)" class="tag badge mx-2 mb-4" [class.badge-secondary]="!isInTagArray(tag.id)"
+        [class.badge-warning]="isInTagArray(tag.id)" [class.badge-pill]="isInTagArray(tag.id)"
         *ngFor="let tag of tags">{{tag.title}}</span>
       <input type="hidden" formControlName="tags" value="{{tagArray}}">
     </div>

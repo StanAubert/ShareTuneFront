@@ -33,6 +33,7 @@ export class PlaylistFormComponent implements OnInit {
   ngOnInit() {
     this.service.allTags().subscribe(tags => {
       this.tags = tags;
+      this.loading = true;
     });
 
     // on verifie l'id dans l'url

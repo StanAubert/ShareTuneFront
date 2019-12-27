@@ -11,7 +11,7 @@
           aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDrop4">
           <a class="dropdown-item text-decoration-none point" routerLink="/playlist/{{playlist?.id}}/edit">modifier</a>
-          <a class="dropdown-item text-decoration-none point" (click)="delete(playlist.id)">Supprimer</a>
+          <a class="dropdown-item text-decoration-none point" (click)="playlistDelete(playlist.id)">Supprimer</a>
         </div>
       </div>
     </div>
@@ -49,6 +49,9 @@
             <td>{{song.title}} <a *ngIf="userLocal.id == playlist?.user?.id" class="text-warning"
                 routerLink="/song/{{song.id}}/edit"><i class="fas fa-edit"></i></a></td>
             <td>{{song.duration}}</td>
+            <td *ngIf="userLocal.id == playlist?.user?.id">
+              <button class="btn btn-danger btn-sm" (click)="songDelete(song.id)"><i class="fas fa-trash"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>

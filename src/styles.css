@@ -20,8 +20,8 @@ body {
 }
 
 .bg-dark-07 {
+  background-color: rgba(0, 0, 0, 0.7);
   box-shadow: #000 0px 0px 6px 1px;
-
 }
 
 .loading {

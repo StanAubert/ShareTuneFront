@@ -11,19 +11,20 @@
   <div class="d-inline custom-control custom-radio mx-3">
     <input class="custom-control-input" type="radio" name="filterOptions" id="tag-radio" value="tag"
       (focus)="filterSearch('tag')">
-    <label class="label custom-control-label" [class.selected-label]="filter == 'tag'" for="tag-radio">Tags</label>
+    <label class="label custom-control-label" [class.selected-label]="filter == 'tag'" for="tag-radio">Tags <i
+        class="fas fa-heart tag-i"></i></label>
   </div>
   <div class="d-inline custom-control custom-radio mx-3">
     <input class="custom-control-input" type="radio" name="filterOptions" id="playlist-radio" value="playlist"
       (focus)="filterSearch('playlist')">
     <label class="label custom-control-label" [class.selected-label]="filter == 'playlist'"
-      for="playlist-radio">Playlists</label>
+      for="playlist-radio">Playlists <i class="fas fa-compact-disc playlist-i"></i></label>
   </div>
   <div class="d-inline custom-control custom-radio mx-3">
     <input class="custom-control-input" type="radio" name="filterOptions" id="user-radio" value="user"
       (focus)="filterSearch('user')">
-    <label class="label custom-control-label" [class.selected-label]="filter == 'user'"
-      for="user-radio">Utilisateurs</label>
+    <label class="label custom-control-label" [class.selected-label]="filter == 'user'" for="user-radio">Utilisateurs
+      <i class="fas fa-user user-i"></i></label>
   </div>
   <!-- <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="filterOptions" id="song-radio" value="song"

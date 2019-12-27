@@ -20,8 +20,7 @@
         <li class="nav-item"><a routerLink="/login" class="btn btn-outline-primary btn-lg">Connexion</a></li>
       </ng-container>
       <ng-container *ngIf="isAuthenticated">
-        <li class="nav-item"><a routerLink="/account/{{user?.id}}" class="nav-link"><img src="{{user.profilePicture}}"
-              class="mr-2 rounded-circle"> Mon compte</a></li>
+        <li class="nav-item"><a routerLink="/account/{{user?.id}}" class="nav-link"> Mon compte</a></li>
         <li class="nav-item nav-link"><button (click)="handleLogout()" class="btn btn-danger">Déconnexion</button></li>
       </ng-container>
     </ul>

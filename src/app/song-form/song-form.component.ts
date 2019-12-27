@@ -26,9 +26,9 @@ export class SongFormComponent implements OnInit {
   importedThumbnail: string;
 
   form = new FormGroup({
-    title: new FormControl("", Validators.required),
+    title: new FormControl(),
     description: new FormControl(),
-    duration: new FormControl("", Validators.required),
+    duration: new FormControl(),
     code: new FormControl(),
     playlist: new FormControl()
   });
@@ -52,6 +52,8 @@ export class SongFormComponent implements OnInit {
           this.form.patchValue(this.song);
         });
       }
+    } else {
+      this.loading = true;
     }
   }
 
@@ -94,8 +96,9 @@ export class SongFormComponent implements OnInit {
         e => console.log(e),
 
         () => {
-          this.service.addSong(this.newSong).subscribe();
-          this.router.navigateByUrl("/playlist/" + this.playlistId);
+          this.service.addSong(this.newSong).subscribe(result => {
+            this.router.navigateByUrl("/playlist/" + this.playlistId);
+          });
         }
       );
       console.log(this.newSong);

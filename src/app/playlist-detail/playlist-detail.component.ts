@@ -1,17 +1,16 @@
-import { Component, OnInit, ViewChild, ComponentRef } from '@angular/core';
-import { PlaylistService } from '../playlist.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Playlist } from '../Models/Playlist';
-import { YouTubePlayer } from '@angular/youtube-player';
-import { Song } from '../Models/Song';
+import { Component, OnInit, ViewChild, ComponentRef } from "@angular/core";
+import { PlaylistService } from "../playlist.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Playlist } from "../Models/Playlist";
+import { YouTubePlayer } from "@angular/youtube-player";
+import { Song } from "../Models/Song";
 
 @Component({
-  selector: 'app-playlist-detail',
-  templateUrl: './playlist-detail.component.html',
-  styleUrls: ['./playlist-detail.component.css']
+  selector: "app-playlist-detail",
+  templateUrl: "./playlist-detail.component.html",
+  styleUrls: ["./playlist-detail.component.css"]
 })
 export class PlaylistDetailComponent implements OnInit {
-
   @ViewChild(YouTubePlayer, { static: false })
   player: YouTubePlayer;
   playlist: Playlist;
@@ -22,11 +21,15 @@ export class PlaylistDetailComponent implements OnInit {
   currentSong: Song;
   firstPlay = false;
 
-  constructor(private service: PlaylistService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private service: PlaylistService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.userLocal = JSON.parse(localStorage.getItem('user'));
-    const id = +this.route.snapshot.paramMap.get('id');
+    this.userLocal = JSON.parse(localStorage.getItem("user"));
+    const id = +this.route.snapshot.paramMap.get("id");
     this.service.find(id).subscribe(result => {
       this.playlist = result;
       this.loading = true;
@@ -34,27 +37,28 @@ export class PlaylistDetailComponent implements OnInit {
       this.firstSong = result.songs[0];
 
       result.songs.forEach(song => {
-        song.duration = song.duration.replace('PT', '');
-        song.duration = song.duration.replace('H', 'h');
-        song.duration = song.duration.replace('M', ':');
-        song.duration = song.duration.replace('S', 's');
-      })
-      const tag = document.createElement('script');
+        song.duration = song.duration.replace("PT", "");
+        song.duration = song.duration.replace("H", "h");
+        song.duration = song.duration.replace("M", ":");
+        song.duration = song.duration.replace("S", "s");
+      });
+      const tag = document.createElement("script");
 
       tag.src = "https://www.youtube.com/iframe_api";
       document.body.appendChild(tag);
       this.playerLoaded = true;
-    })
+    });
   }
 
   onStateChange(e: YT.OnStateChangeEvent) {
     if (e.data == YT.PlayerState.ENDED) {
-      let index = this.playlist.songs.findIndex(song => song === this.currentSong)
+      let index = this.playlist.songs.findIndex(
+        song => song === this.currentSong
+      );
 
       if (index == this.playlist.songs.length - 1) {
         index = 0;
-      }
-      else {
+      } else {
         index++;
       }
 
@@ -69,15 +73,21 @@ export class PlaylistDetailComponent implements OnInit {
     this.player.videoId = this.currentSong.code;
     if (this.player.getPlayerState() == YT.PlayerState.PLAYING) {
       this.player.pauseVideo();
-    }
-    else {
+    } else {
       this.player.playVideo();
     }
     this.firstPlay = true;
   }
 
   isPlaying(song: Song) {
-    return song == this.currentSong && this.player && (this.player.getPlayerState() == YT.PlayerState.PLAYING || this.player.getPlayerState() == YT.PlayerState.BUFFERING || this.firstPlay) || false;
+    return (
+      (song == this.currentSong &&
+        this.player &&
+        (this.player.getPlayerState() == YT.PlayerState.PLAYING ||
+          this.player.getPlayerState() == YT.PlayerState.BUFFERING ||
+          this.firstPlay)) ||
+      false
+    );
   }
 
   // isPaused(song: Song) {
@@ -85,17 +95,33 @@ export class PlaylistDetailComponent implements OnInit {
   // }
 
   isPaused(song: Song) {
-    return !this.isPlaying(song) || (this.player.getPlayerState() == YT.PlayerState.PAUSED);
+    return (
+      !this.isPlaying(song) ||
+      this.player.getPlayerState() == YT.PlayerState.PAUSED
+    );
   }
 
-  delete(id) {
-    if (window.confirm("Attention la playlist est sur le point d'être supprimée, voulez-vous continuer ?")) {
-      this.service.remove(id).subscribe(
-        result => {
-          this.router.navigateByUrl("/account/" + this.userLocal.id)
-        }
-      );
+  playlistDelete(id) {
+    if (
+      window.confirm(
+        "Attention la playlist est sur le point d'être supprimée, voulez-vous continuer ?"
+      )
+    ) {
+      this.service.remove(id).subscribe(result => {
+        this.router.navigateByUrl("/account/" + this.userLocal.id);
+      });
     }
+  }
 
+  songDelete(id) {
+    if (
+      window.confirm(
+        "Attention le morceaux est sur le point d'être supprimée, voulez-vous continuer ?"
+      )
+    ) {
+      this.service.songRemove(id).subscribe(result => {
+        document.location.reload();
+      });
+    }
   }
 }
